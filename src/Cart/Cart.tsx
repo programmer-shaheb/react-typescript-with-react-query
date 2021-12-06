@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import { CartItemType } from "../App";
 import { Wrapper } from "../Cart/Cart.styles";
 import CartItem from "../CartItem/CartItem";
@@ -6,9 +7,15 @@ interface Props {
   cartItems: CartItemType[];
   addToCart: (clickedItem: CartItemType) => void;
   removeFromCart: (id: number) => void;
+  resetCart: () => void;
 }
 
-const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
+const Cart: React.FC<Props> = ({
+  cartItems,
+  addToCart,
+  removeFromCart,
+  resetCart,
+}) => {
   const calculateTotal = (items: CartItemType[]) =>
     items.reduce(
       (prevValue: number, currentValue) =>
@@ -29,6 +36,9 @@ const Cart: React.FC<Props> = ({ cartItems, addToCart, removeFromCart }) => {
         />
       ))}
       <h2>Total: $ {calculateTotal(cartItems).toFixed(2)}</h2>
+      {cartItems.length !== 0 && (
+        <Button onClick={resetCart}>Reset Cart</Button>
+      )}
     </Wrapper>
   );
 };

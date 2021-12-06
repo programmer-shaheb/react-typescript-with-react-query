@@ -90,6 +90,8 @@ const App = () => {
     setCartItems(newFilteredCart);
   };
 
+  const resetCart = () => setCartItems((prev) => []);
+
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something went wrong...</div>;
 
@@ -104,6 +106,7 @@ const App = () => {
           cartItems={cartItems}
           removeFromCart={removeFromCart}
           addToCart={handleAddToCart}
+          resetCart={resetCart}
         />
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}>
